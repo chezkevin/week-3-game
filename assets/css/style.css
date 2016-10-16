@@ -1,0 +1,7 @@
+.col-sm-6, .col-sm-3 {
+    width: 50%;
+    float: left;
+}
+h1,h2,h3,h4,p{
+	font-family: Lucida-Console;
+}

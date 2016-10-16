@@ -2,9 +2,43 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Hangman: Pokemon Edition</title>
+	<link href="assets/css/style.css" rel="stylesheet">
 </head>
+
 <body>
-	
+	<div class="heading">
+		<h1>Hangman: Pokemon Edition</h1>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<p>
+					Guess the Pokemon name to win. Press any key to get started!
+				</p>
+				<!-- Display number of wins -->
+				<div class="col-sm-3">Wins:</div>
+				<div class="col-sm-3"><div id="num-wins"></div></div>
+
+				<!--Display current word, initially in blanks-->
+				<div class="col-sm-3">Current Word:</div>
+				<div class="col-sm-3"><div id="answer-blanks"></div></div>
+				
+				<!--Display # guesses remaining-->
+				<div class="col-sm-3">Number of guesses remaining:</div>
+				<div class="col-sm-3"><div id="guesses-remain"></div></div>
+
+				<!--Display letters already guessed-->
+				<div class="col-sm-3">Letters already guessed:</div>
+				<div class="col-sm-3"><div id="letters-guessed"></div></div>
+
+			</div>
+			<div class="col-sm-6">
+				<img src="assets/images/Pokemon_Center.png">
+			</div>
+		</div>
+	</div>
+
+<script src = "assets/javascript/game.js"></script>
 </body>
 </html>
