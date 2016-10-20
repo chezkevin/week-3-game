@@ -1,4 +1,4 @@
-var answers = ["mew","gastly","onix","bulbasaur","squirtle","charmander"];
+var answers = ["mew","gastly","onix","bulbasaur","squirtle","charmander","xerneas"];
 
 var wins = 0;
 var attempts = 0;
@@ -30,7 +30,6 @@ document.onkeyup = function(event) {
 			alert("Sorry, you are not a Pokemon Master. Try again!");
 			attempts = 0;
 			lettersGuessed = "";
-			workingAnswer = [];
 			startGame();
 		}
 		attempts = attempts + 1;
@@ -57,7 +56,7 @@ document.onkeyup = function(event) {
 					workingAnswer[i] = userInput;
 				//}
 			}
-			document.querySelector('#answer-blanks').innerHTML = workingAnswer;
+			document.querySelector('#answer-blanks').innerHTML = workingAnswer.join('');
 		}
 
 		if (workingAnswer.includes("_ ") === false){
@@ -65,13 +64,13 @@ document.onkeyup = function(event) {
 			attempts = 0;
 			wins = wins + 1;
 			lettersGuessed = "";
-			workingAnswer = [];
 			startGame();
 		}
 	}
 }
 
 function startGame(){
+	workingAnswer = new Array();
 
 	// Pick a Pokemon name, randomly
 	pokemonName = answers[Math.floor(Math.random() * answers.length)];
@@ -84,8 +83,12 @@ function startGame(){
 	for (var i = 0; i < pokemonName.length; i++){
 		workingAnswer[i] = "_ ";
 	 	}
+
+	//Display max attempts
 	document.querySelector('#guesses-remain').innerHTML = maxAttempts;
-	document.querySelector('#answer-blanks').innerHTML = workingAnswer;
+	
+	//Display the working answer (initially, in blanks)
+	document.querySelector('#answer-blanks').innerHTML = workingAnswer.join('');
 }
 
 startGame();
