@@ -51,20 +51,18 @@ document.onkeyup = function(event) {
 				);
 
 			if ( userInput === pokemonName.charAt(i) ){
-				//console.log( "lettersGuessed.includes(userInput): " + lettersGuessed.includes(userInput) );
-				//if ( lettersGuessed.includes(userInput) === false ){
-					workingAnswer[i] = userInput;
-				//}
+				workingAnswer[i] = userInput;
+				document.querySelector('#answer-blanks').innerHTML = workingAnswer.join('');
 			}
-			document.querySelector('#answer-blanks').innerHTML = workingAnswer.join('');
 		}
 
 		if (workingAnswer.includes("_ ") === false){
-			alert("Wow! You're a Pokemon Master!");
+			document.querySelector('#answer-blanks').innerHTML = pokemonName;
 			attempts = 0;
 			wins = wins + 1;
 			lettersGuessed = "";
-			startGame();
+			//startGame();
+			setTimeout(function() {alert("Wow! You're a Pokemon Master!"); startGame();}, 0);
 		}
 	}
 }
@@ -83,6 +81,9 @@ function startGame(){
 	for (var i = 0; i < pokemonName.length; i++){
 		workingAnswer[i] = "_ ";
 	 	}
+
+	// Display letters guessed
+	document.querySelector('#letters-guessed').innerHTML = lettersGuessed;
 
 	//Display max attempts
 	document.querySelector('#guesses-remain').innerHTML = maxAttempts;
