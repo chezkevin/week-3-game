@@ -8,33 +8,35 @@ var lettersGuessed="";
 var pokemonName;
 var workingAnswer = new Array();
 
-
 // Validate variable is a letter
-function isLetter(input){  
-   var letters = /^[A-Za-z]+$/;  
-   if(input.match(letters)){  
-      return true;  
-     }  
-   else{  
-     alert("Please type a letter.");  
-     return false;  
-     }  
-  }  
+function isLetter(input){
+	var letters = /^[A-Za-z]+$/;
+		if(input.match(letters)){
+			return true;
+		}
+	else{
+		alert("Please type a letter.");
+		return false;
+	}
+}
 
 // When the user presses the key it records the keypress and then sets it to userInput
 document.onkeyup = function(event) {
 	var userInput = String.fromCharCode(event.keyCode).toLowerCase();
 	
 	if (isLetter(userInput)){
+		// If user ran out of attempts. . .
 		if (attempts === maxAttempts){
 			alert("Sorry, you are not a Pokemon Master. Try again!");
 			attempts = 0;
 			lettersGuessed = "";
 			startGame();
 		}
-		attempts = attempts + 1;
 
+		// Update stats every time user guesses
+		attempts = attempts + 1;
 		lettersGuessed = lettersGuessed + userInput + ",";
+
 		//Display the letters guessed by the user
 		document.querySelector('#letters-guessed').innerHTML = lettersGuessed;
 		
@@ -42,27 +44,23 @@ document.onkeyup = function(event) {
 		attemptsLeft = maxAttempts - attempts;
 		document.querySelector('#guesses-remain').innerHTML = attemptsLeft;
 		
-		// Check if userInput matched any value from the pokemonName
+		// If userInput matched any value from the pokemonName
 		for (var i = 0; i < pokemonName.length; i++){
 			console.log("userInput: " + userInput +
 				"    pokemonName letter: " + pokemonName.charAt(i) +
 				"    pokemonName: " + pokemonName +
 				"    workingAnswer: " + workingAnswer[i]
 				);
-
+			// If user guessed right
 			if ( userInput === pokemonName.charAt(i) ){
 				workingAnswer[i] = userInput;
 				document.querySelector('#answer-blanks').innerHTML = workingAnswer.join('');
 			}
 		}
 
+		// If user guessed all of them correctly
 		if (workingAnswer.includes("_ ") === false){
-			document.querySelector('#answer-blanks').innerHTML = pokemonName;
-			attempts = 0;
-			wins = wins + 1;
-			lettersGuessed = "";
-			//startGame();
-			setTimeout(function() {alert("Wow! You're a Pokemon Master!"); startGame();}, 0);
+			reStartGame();
 		}
 	}
 }
@@ -90,6 +88,13 @@ function startGame(){
 	
 	//Display the working answer (initially, in blanks)
 	document.querySelector('#answer-blanks').innerHTML = workingAnswer.join('');
+}
+
+function reStartGame(){
+	attempts = 0;
+	wins = wins + 1;
+	lettersGuessed = "";
+	setTimeout(function() {alert("Wow! You're a Pokemon Master!"); startGame();}, 0);
 }
 
 startGame();
